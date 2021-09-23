@@ -1,0 +1,538 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Layered Neural Atlases for Consistent Video Editing: Supplementary Material</title>
+<link href="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div class="container">
+  <h1 align="center">Layered Neural Atlases for Consistent Video Editing</h1>
+	<h2 align="center">Yoni Kasten &nbsp; Dolev Ofri &nbsp; Oliver Wang &nbsp; Tali Dekel</h2>
+  <h2 align="center">Supplementary Material</h2>
+	
+  <p align="center">&nbsp;</p>
+  <ul>
+	<li><a href="#edits_applications">Video Editing Applications (Figure 6)</a></li>
+    <li><a href="#atlas_edit_lucia">Atlas Editing (Figure 1)</a></li>
+	<li><a href="#unwrap">Giraffe Sequence (from Unwrap Mosaics)</a></li>
+    <li><a href="#results">Reconstruction Results and Atlases (Figure 4)</a></li>
+	<li><a href="#coarse_masks">Coarse User Masks and Multiple Foreground Objects (Figure 7)</a></li>  
+    <li><a href="#video_prop_comparison">Video Propagation (Figure 5)</a></li>
+	<li><a href="#grid_atlas">Architecture Ablation: Grid Atlas (Figure 9)</a></li>
+	<li><a href="#limitation">Editing a Failure Example (Figure 11)</a></li>
+	<li><a href="#removing_fg_object">Removing Foreground Objects From a Video</a></li>
+	<li><a href="#additional_limitation">Failure Example</a></li>
+	<li><a href="#editDemo">Editing Demo</a></li>
+  </ul>
+  <p><br><span class="emph">We recommend watching all videos in full screen. Click on the images or videos for seeing them in full scale.</span></p>
+  <p>&nbsp;</p>
+	<hr>
+  <h2 align="left"><a name="edits_applications" id="edits_applications"></a>Video Editing Applications</h2>
+  <p align="left">Editing examples from Figure 6, showing the edited atlas/frame together with the input video alongside the edited video. Our method can produce a variety of video effects including transferring texture ("Kite-surf" and "Libby"), stylizing the background or the foreground atlases ("Blackswan" and Bicycle"), or transferring a still image into a moving background in a video ("Boat").</p>
+	<p>&nbsp;</p>
+  <table width="1000" border="0" align="center"><tbody>
+      <tr>
+		  <td> <strong> "Kite-surf" </strong></td>
+	  </tr>
+	  <tr>
+		  <td align="center"> <a href="Layered_Neural_Atlases_for_Consistent_Video_Editing_files/editing/kite-surf/kite_bg_atlas_edited.png"><img src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/editing/kite-surf/kite_bg_atlas_edited.png" height="200"></a> </td>
+		  <td align="center"><video height="200" controls="controls">
+          <source src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/editing/kite-surf/stacked-output.mp4" type="video/mp4">
+        </video></td>
+	  </tr>
+	  <tr>
+		  <td align="center"> Edited background atlas </td><td align="center"> Original video (left) and edited video (right) </td> 
+	  </tr>
+	  
+	  <tr>
+		  <td> <strong> "Blackswan" </strong></td>
+	  </tr>
+	  <tr>
+        <td align="center"> <a href="Layered_Neural_Atlases_for_Consistent_Video_Editing_files/editing/blackswan/blackswan_fg_atlas_edited.png"><img src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/editing/blackswan/blackswan_fg_atlas_edited.png" height="200"></a></td>
+		<td align="center"><video height="200" controls="controls">
+          <source src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/editing/blackswan/stacked-output.mp4" type="video/mp4">
+        </video></td>
+	  </tr>
+	  <tr>
+		  <td align="center"> Edited foreground atlas </td><td align="center"> Original video (left) and edited video (right) </td> 
+	  </tr>
+	  
+	  <tr>
+		  <td> <strong> "Boat" </strong></td>
+	  </tr>
+	  <tr>
+        <td align="center"> <a href="Layered_Neural_Atlases_for_Consistent_Video_Editing_files/editing/boat/boat_bg_atlas_edited.png"><img src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/editing/boat/boat_bg_atlas_edited.png" height="200"></a></td>
+		<td align="center"><video height="200" controls="controls">
+          <source src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/editing/boat/stacked-output.mp4" type="video/mp4">
+        </video></td>
+	  </tr>
+	  <tr>
+		  <td align="center"> Edited background atlas </td><td align="center"> Original video (left) and edited video (right) </td> 
+	  </tr>
+	  
+	  <tr>
+		  <td> <strong> "Bicycle" </strong></td>
+	  </tr>
+	  <tr>
+        <td align="center"> <a href="Layered_Neural_Atlases_for_Consistent_Video_Editing_files/editing/bicycle/bicycle_bg_atlas_edited.png"><img src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/editing/bicycle/bicycle_bg_atlas_edited.png" height="200"></a></td>
+		<td align="center"><video height="200" controls="controls">
+          <source src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/editing/bicycle/stacked-output.mp4" type="video/mp4">
+        </video></td>
+	  </tr>
+	  <tr>
+		  <td align="center"> Edited background atlas </td><td align="center"> Original video (left) and edited video (right) </td> 
+	  </tr>
+	  
+	  <tr>
+		  <td> <strong> "Libby" </strong></td>
+	  </tr>
+	  <tr>
+        <td align="center"> <a href="Layered_Neural_Atlases_for_Consistent_Video_Editing_files/editing/libby/edit_frame.png"><img src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/editing/libby/edit_frame.png" height="200"></a></td>
+		<td align="center"><video height="200" controls="controls">
+          <source src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/editing/libby/stacked-output.mp4" type="video/mp4">
+        </video></td>
+	  </tr>
+	  <tr>
+		  <td align="center"> Edited frame </td><td align="center"> Original video (left) and edited video (right) </td> 
+	  </tr>
+    </tbody>
+		
+  </table>
+	
+	<p>&nbsp;</p>
+  <hr>
+  <h2 align="left"><a name="atlas_edit_lucia" id="atlas_edit_lucia"></a>Atlas Editing</h2>
+  <p align="left">Results corresponding to Figure 1 in the paper. The editing result is done on the foreground and background atlases of "Lucia" video. We show in the first two row the foreground/backgound atlases before and after editing, and in the third row the original video and the edited videos. For the editing part, we show the result in two different settings: working with one foreground layer (middle column, including the atlases in the left column) and working with two foreground layers (right column). Using two layers, the model is able to map the legs to separate layers throughout the video and the quality of edited video improves significantly.</p>
+  <h3>"Lucia"</h3>
+  <table width="1000" border="0" align="center"><tbody><tr>
+      </tr>
+	  <tr>
+		<td align="center"><a href="Layered_Neural_Atlases_for_Consistent_Video_Editing_files/teaser/fg_atlas.png"><img src="Layered_Neural_Atlases_for_Consistent_Video_Editing_files/teaser/fg_atlas.png" height="220"></a></td>
+		  <td align="center"><a href="Layered_Neural_Atlases_for_Consistent_Video_Editing_files/teaser/fg_atlas_edited.png"><img src="Layered_Neural_Atlases_for_Consistent_Video_Editing_files/teaser/fg_atlas_edited.png" height="220"></a></td>
+		  <td align="center"><a href="Layered_Neural_Atlases_for_Consistent_Video_Editing_files/teaser/fg_atlas_edited_multi.png"><img src="Layered_Neural_Atlases_for_Consistent_Video_Editing_files/teaser/fg_atlas_edited_multi.png" height="220"></a></td>
+      </tr>
+	  <tr>
+		<td align="center">Original foreground atlas</td>
+		  <td align="center">Edited one-foreground atlas</td>
+		  <td align="center">Edited two-foreground atlas</td>
+      </tr>
+	  <tr>
+		<td align="center"><a href="Layered_Neural_Atlases_for_Consistent_Video_Editing_files/teaser/bg_atlas.png"><img src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/teaser/bg_atlas.png" height="220"></a></td>
+	    <td align="center"><a href="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/teaser/bg_atlas_edited.png"><img src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/teaser/bg_atlas_edited.png" height="220"></a></td>
+		  <td align="center"><a href="Layered_Neural_Atlases_for_Consistent_Video_Editing_files/teaser/bg_atlas_edited_multi.png"><img src="Layered_Neural_Atlases_for_Consistent_Video_Editing_files/teaser/bg_atlas_edited_multi.png" height="220"></a></td>
+      </tr>
+	  <tr>
+		<td align="center">Original background atlas</td>
+		  <td align="center">Edited background atlas</td>
+		  <td align="center">Edited background atlas</td>
+      </tr>
+	  </tbody>
+  </table>
+	  <table width="1000" border="0" align="center"><tbody><tr>
+      </tr>
+	  <tr>
+		<td align="center"><video width="1200" controls="controls">
+          <source src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/teaser/stacked-output.mp4" type="video/mp4">
+			</video> </td>
+      </tr>
+		  </tbody>
+  </table>
+  <p><br>
+  </p>
+	<p>&nbsp;</p>
+  <hr>
+  <h2 align="left"><a name="unwrap" id="unwrap"></a>Giraffe Sequence (from Unwrap Mosaics)</h2>
+  <p align="left">We use the well-know giraffe video also shown in Unwrap Mosaics work <a href="#ref1">[1]</a>. There are no implementations of this method available, however we managed to run our method on this sequence. We downloaded their result from their supplementary video for comparison. We can see that our approach successfully separates the foreground from the background, and models its non-rigid deformations.</p>
+  <h3>"Giraffe"</h3>
+	<table width="800" border="0" align="center"><tbody><tr>
+      </tr>
+	  <tr>
+		<td align="center"><a href="Layered_Neural_Atlases_for_Consistent_Video_Editing_files/giraffe/foreground_atlas.png"><img src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/giraffe/foreground_atlas.png" height="250"></a></td>
+		<td align="center"><a href="Layered_Neural_Atlases_for_Consistent_Video_Editing_files/giraffe/background_atlas.png"><img src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/giraffe/background_atlas.png" height="250"></a></td>
+	  </tr>
+	  <tr>
+		<td align="center">Our Foreground atlas</td>
+		<td align="center">Our Background atlas</td>
+	  </tr>
+		  </tbody>
+  </table>
+  <table width="1000" border="0" align="center"><tbody><tr>
+      </tr>
+	  <tr>
+		<td align="center"><video width="800" controls="controls">
+          <source src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/giraffe/stacked-output.mp4" type="video/mp4">
+        </video></td>
+		  
+	  </tr>
+		  </tbody>
+  </table>
+  <p>&nbsp;</p>
+  <p><br>
+  </p>
+	
+	
+  <hr>
+  <h2 align="left"><a name="results" id="results"></a>Reconstruction Results and Atlases</h2>
+  <p align="left">Results corresponding to Figure 4 in the paper. We present here the foreground atlas image, background atlas image, input video, the texture mapped overlay, the reconstructed video, and the RGBA foreground layer; the RGBA layer is produced by multiplying our model's predicted alpha by the original frames. As can be seen, our model successfully manages to decompose the videos and produce a foreground and background atlases which can be used later for editing.</p>
+  
+  <h3>"Motorbike"</h3>
+	<table width="800" border="0" align="center"><tbody><tr>
+      </tr>
+	  <tr>
+		<td align="center"><a href="Layered_Neural_Atlases_for_Consistent_Video_Editing_files/results/motorbike/foreground_atlas.png"><img src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/results/motorbike/foreground_atlas.png" height="220"></a></td>
+		<td align="center"><a href="Layered_Neural_Atlases_for_Consistent_Video_Editing_files/results/motorbike/background_atlas.png"><img src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/results/motorbike/background_atlas.png" height="220"></a></td>
+      </tr>
+		<tr>
+		<td align="center">Foreground atlas</td>
+		<td align="center">Background atlas</td>
+      </tr>
+	</tbody>
+  </table>	
+	<table width="1000" border="0" align="center"><tbody><tr>
+      </tr>
+      <tr>
+        <td align="center"><video width="800" controls="controls">
+          <source src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/results/motorbike/stacked-output.mp4" type="video/mp4">
+        </video></td>
+	  </tr>
+    </tbody>
+  </table>
+  <p>&nbsp;</p>
+  <h3>"Libby"</h3>
+  <table width="800" border="0" align="center"><tbody><tr>
+      </tr>
+	  <tr>
+		<td align="center"><a href="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/results/libby/foreground_atlas.png"><img src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/results/libby/foreground_atlas.png" height="190"></a></td>
+		<td align="center"><a href="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/results/libby/background_atlas.png"><img src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/results/libby/background_atlas.png" height="240"></a></td>
+      </tr>
+	  <tr>
+		<td align="center">Foreground atlas</td>
+		<td align="center">Background atlas</td>
+      </tr>
+	  </tbody>
+  </table>
+	  <table width="1000" border="0" align="center"><tbody><tr>
+      </tr>
+      <tr>
+        <td align="center"><video width="800" controls="controls">
+          <source src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/results/libby/stacked-output.mp4" type="video/mp4">
+        </video></td>
+	  </tr>
+    </tbody>
+  </table>
+  <p>&nbsp;</p>
+  <h3>"Boat"</h3>
+  <table width="800" border="0" align="center"><tbody><tr>
+      </tr>
+	  <tr>
+		<td align="center"><a href="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/results/boat/foreground_atlas.png"><img src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/results/boat/foreground_atlas.png" height="240"></a></td>
+		<td align="center"><a href="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/results/boat/background_atlas.png"><img src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/results/boat/background_atlas.png" height="240"></a></td>
+      </tr>
+	  <tr>
+		<td align="center">Foreground atlas</td>
+		<td align="center">Background atlas</td>
+      </tr>
+	 </tbody>
+  </table>
+	<table width="1000" border="0" align="center"><tbody><tr>
+      </tr>
+      <tr>
+        <td align="center"><video width="800" controls="controls">
+          <source src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/results/boat/stacked-output.mp4" type="video/mp4">
+        </video></td>
+	  </tr>
+    </tbody>
+  </table>
+  <p>&nbsp;</p>
+  <h3>"Car-turn"</h3>
+  <table width="800" border="0" align="center"><tbody><tr>
+      </tr>
+	  <tr>
+		<td align="center"><a href="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/results/car-turn/foreground_atlas.png"><img src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/results/car-turn/foreground_atlas.png" height="250"></a></td>
+		<td align="center"><a href="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/results/car-turn/background_atlas.png"><img src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/results/car-turn/background_atlas.png" height="250"></a></td>
+      </tr>
+	  <tr>
+		<td align="center">Foreground atlas</td>
+		<td align="center">Background atlas</td>
+      </tr>
+	  </tbody>
+  </table>
+	  <table width="1000" border="0" align="center"><tbody><tr>
+      </tr>
+      <tr>
+        <td align="center"><video width="800" controls="controls">
+          <source src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/results/car-turn/stacked-output.mp4" type="video/mp4">
+        </video></td>
+	  </tr>
+    </tbody>
+  </table>
+  <p>&nbsp;</p>
+  <h3>"Kite-surf"</h3>
+  <table width="800" border="0" align="center"><tbody><tr>
+      </tr>
+	  <tr>
+		<td align="center"><a href="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/results/kite-surf/foreground_atlas.png"><img src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/results/kite-surf/foreground_atlas.png" height="230"></a></td>
+		<td align="center"><a href="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/results/kite-surf/background_atlas.png"><img src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/results/kite-surf/background_atlas.png" height="240"></a></td>
+      </tr>
+	  <tr>
+		<td align="center">Foreground atlas</td>
+		<td align="center">Background atlas</td>
+      </tr>
+	 </tbody>
+  </table>
+	<table width="1000" border="0" align="center"><tbody><tr>
+      </tr>
+      <tr>
+        <td align="center"><video width="800" controls="controls">
+          <source src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/results/kite-surf/stacked-output.mp4" type="video/mp4">
+        </video></td>
+	  </tr>
+    </tbody>
+  </table>
+  <p>&nbsp;</p>
+  <p><br>
+  </p>
+	
+  <hr>
+  <h2 align="left"><a name="coarse_masks" id="coarse_masks"></a>Coarse User Masks and Multiple Foreground Objects</h2>
+  <p align="left">Results corresponding to Figure 7 in the paper. Coarse masks are provided by the user and are used as an initialization for the layers decomposition, having a separate foreground layer for each of the gliders. We present (a) the input video, (b) the input coarse masks for each of the gliders provided by the user, (c) the reconstructed video, and (d) the output alphas after training multiplied by the frames. As can be seen, our model manages to refine the decomposition of the layers.</p>
+  <h3>"Parachuting"</h3>
+	  <table width="1000" border="0" align="center"><tbody><tr>
+      </tr>
+      <tr>
+		<td align="center"><video height="500" controls="controls">
+          <source src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/coarse_masks/stacked-output.mp4" type="video/mp4">
+        </video>
+	    </td>
+      </tr>
+    </tbody>
+	</table>
+	
+	<p>&nbsp;</p>
+  <hr>
+  <h2 align="left"><a name="video_prop_comparison" id="video_prop_comparison"></a>Video Propagation</h2>
+  <p align="left">Results corresponding to Figure 5. Coparison to a flow baseline and Videowalk <a href="#ref2">[2]</a> for the task of video propagation. The input is a edited frame, where the edit consists of horizonal colored stripes on the first frame of the input video. Our method is able to produce better results in terms of temporal consistency. See more details in the paper. </p>
+  <p align="left">&nbsp;</p>
+  <table width="1000" border="0" align="center">
+    <tbody>
+      <tr>
+        <td align="center"><a href="Layered_Neural_Atlases_for_Consistent_Video_Editing_files/video_prop/00_00000_blend.jpg"><img src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/video_prop/00_00000_blend.jpg" height="160"></a></td>
+		  <td align="center"><video width="920" controls="controls">
+            <source src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/video_prop/00stacked-output.mp4" type="video/mp4">
+          </video></td>
+      </tr>
+		<tr>
+        <td align="center">Input edited frame</td>
+		  <td align="center"> Video propagation output given by flow baseline (left) Videowalk (middle) and our model (right)</td>
+      </tr>
+		</tbody>
+  </table>
+		<table width="1000" border="0" align="center">
+    <tbody>
+		<tr>
+			<td align="center"><a href="Layered_Neural_Atlases_for_Consistent_Video_Editing_files/video_prop/02_00000_blend.jpg"><img src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/video_prop/02_00000_blend.jpg" height="160"></a></td>
+        <td align="center"><video width="920" controls="controls">
+            <source src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/video_prop/02stacked-output.mp4" type="video/mp4">
+          </video></td>
+      </tr>
+		</tbody>
+  </table>
+		<table width="1000" border="0" align="center">
+    <tbody>
+		<tr>
+        <td align="center">Input edited frame</td>
+		  <td align="center"> Video propagation output given by flow baseline (left) Videowalk (middle) and our model (right)</td>
+      </tr>
+		<tr>
+			<td align="center"><a href="Layered_Neural_Atlases_for_Consistent_Video_Editing_files/video_prop/06_00000_blend.jpg"><img src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/video_prop/06_00000_blend.jpg" height="160"></a></td>
+        <td align="center"><video width="920" controls="controls">
+            <source src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/video_prop/06stacked-output.mp4" type="video/mp4">
+          </video></td>
+      </tr>
+		<tr>
+        <td align="center">Input edited frame</td>
+		  <td align="center"> Video propagation output given by flow baseline (left) Videowalk (middle) and our model (right)</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>&nbsp;</p>
+  <p><br>
+  </p>
+	
+	<hr>
+  <h2 align="left"><a name="grid_atlas" id="grid_atlas"></a>Architecture Ablation: Grid Atlas</h2>
+  <p align="left">Results corresponding to Figure 9. We ablate the choice of using an MLP for representing the atlases vs traditional image-based representations.
+In this experiment, we replace our atlas MLP with a fixed resolution (1000x1000) texture image, and optimized it directly with the rest of our components (mapping and alpha networks) using the same objective (we call this "Grid Atlas"). We note that the Grid Atlas baseline fails to decompose the foreground and background, i.e. the mapping is inconsistent and distorted, and thus these region of the video is not editable.</p>
+  <h3>"Boat"</h3>
+	  
+	<table width="800" border="0" align="center"><tbody><tr>
+      </tr>
+	  <tr>
+		<td align="center"><a href="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/grid_atlas/boat/fg_atlas.png"><img src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/grid_atlas/boat/fg_atlas.png" height="250"></a></td>
+		<td align="center"><a href="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/grid_atlas/boat/bg_atlas.png"><img src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/grid_atlas/boat/bg_atlas.png" height="250"></a></td>
+      </tr>
+	  <tr>
+		<td align="center">Foreground atlas</td>
+		<td align="center">Background atlas</td>
+      </tr>
+	  </tbody>
+  </table>
+	  <table width="1000" border="0" align="center"><tbody><tr>
+      </tr>
+      <tr>
+        <td align="center"><video width="800" controls="controls">
+          <source src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/grid_atlas/boat/grid_boat_results.mp4" type="video/mp4">
+        </video></td>
+	  </tr>
+    </tbody>
+  </table>
+	
+  <p>&nbsp;</p>
+	<h3>"Libby"</h3>
+	  
+	<table width="800" border="0" align="center"><tbody><tr>
+      </tr>
+	  <tr>
+		<td align="center"><a href="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/grid_atlas/libby/fg_atlas.png"><img src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/grid_atlas/libby/fg_atlas.png" height="250"></a></td>
+		<td align="center"><a href="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/grid_atlas/libby/bg_atlas.png"><img src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/grid_atlas/libby/bg_atlas.png" height="250"></a></td>
+      </tr>
+	  <tr>
+		<td align="center">Foreground atlas</td>
+		<td align="center">Background atlas</td>
+      </tr>
+	  </tbody>
+  </table>
+	  <table width="1000" border="0" align="center"><tbody><tr>
+      </tr>
+      <tr>
+        <td align="center"><video width="800" controls="controls">
+          <source src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/grid_atlas/libby/grid_libby_results.mp4" type="video/mp4">
+        </video></td>
+	  </tr>
+    </tbody>
+  </table>
+	
+  <p>&nbsp;</p>
+  
+	
+	
+	
+  <hr>
+  <h2 align="left"><a name="limitation" id="limitation"></a>Editing a Failure Example</h2>
+  <p align="left">Results corresponding to Figure 11 in the paper. Our method was not able to accurately represent the person - the foreground atlas is distorted and missing limbs. However, the background reconstruction is reasonable and supports edits. We present (a) the foreground atlas, (b) the background atlas, (c) the edited background atlas, (d) the input video, (e) the alpha predicted by our method, and (f) the video with the edited background.</p>
+  <h3>"Parkour"</h3>
+  <table width="1000" border="0" align="center"><tbody><tr>
+      </tr>
+	  <tr>
+		<td align="center"><a href="Layered_Neural_Atlases_for_Consistent_Video_Editing_files/limitations/fg_image.png"><img src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/limitations/fg_image.png" height="170"></a></td>
+		<td align="center"><a href="Layered_Neural_Atlases_for_Consistent_Video_Editing_files/limitations/bg_image.png"><img src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/limitations/bg_image.png" height="170"></a></td>
+		<td align="center"><a href="Layered_Neural_Atlases_for_Consistent_Video_Editing_files/limitations/bg_edited.png"><img src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/limitations/bg_edited.png" height="170"></a></td>
+      </tr>
+	  <tr>
+		<td align="center">Foreground atlas</td>
+		<td align="center">Background atlas</td>
+		<td align="center">Edited background altas</td>
+      </tr>
+	  </tbody>
+  </table>
+	  <table width="1000" border="0" align="center"><tbody><tr>
+      </tr>
+      <tr>
+		<td align="center"><video height="250" controls="controls">
+          <source src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/limitations/stacked-output.mp4" type="video/mp4">
+        </video>
+	    </td>
+      </tr>
+    </tbody>
+	</table>
+	
+  <p>&nbsp;</p>
+	
+	<hr>
+  <h2 align="left"><a name="removing_fg_object" id="removing_fg_object"></a>Removing Foreground Objects From a Video</h2>
+  <p align="left">Our approach can be used to remove foreground elements (i.e. to generate a “clean plate“) by setting &alpha;=0 (Eq.(4) in paper). This tends to work under the following assumptions: (1) the motion of the background behind the foreground element is smooth, (2) the unseen regions at a given frame are visible at least one other frame of the video.</p>
+  <h3>"Car-turn"</h3>
+	  <table width="1100" border="0" align="center"><tbody><tr>
+      </tr>
+      <tr>
+		<td align="center"><video width="1100" controls="controls">
+          <source src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/removing_fg/car_turn/fg_removed_comp.mp4" type="video/mp4">
+        </video>
+	    </td>
+      </tr>
+    </tbody>
+	</table>
+	
+  <p>&nbsp;</p>
+	<h3>"Motorbike"</h3>
+	  <table width="1100" border="0" align="center"><tbody><tr>
+      </tr>
+      <tr>
+		<td align="center"><video width="1100" controls="controls">
+          <source src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/removing_fg/motorbike/fg_removed_comp.mp4" type="video/mp4">
+        </video>
+	    </td>
+      </tr>
+    </tbody>
+	</table>
+	
+  <p>&nbsp;</p>
+	
+	<hr>
+  <h2 align="left"><a name="additional_limitation" id="additional_limitation"></a>Failure Example</h2>
+  <p align="left">Another example of a failure case. In this video there is a lot of parallax due to the boulders and the camera movement. In addition, it contains a highly complex movement due to the goat's fur moving in the strong wind. Our method was not able to accurately represent the goat - the foreground atlas is missing legs and the separate hairs were not mapped correctly. The background atlas is smeared due to the parallax and the goat's loose fur. We present (a) the foreground atlas, (b) the background atlas, (c) the input video, (d) the alpha predicted by our method, and (e) the reconstructed video.</p>
+  <h3>"Goat"</h3>
+  <table width="1000" border="0" align="center"><tbody><tr>
+      </tr>
+	  <tr>
+		<td align="center"><a href="Layered_Neural_Atlases_for_Consistent_Video_Editing_files/limitations2/fg_atlas_goat.png"><img src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/limitations2/fg_atlas_goat.png" height="220"></a></td>
+		<td align="center"><a href="Layered_Neural_Atlases_for_Consistent_Video_Editing_files/limitations2/bg_atlas_goat.png"><img src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/limitations2/bg_atlas_goat.png" height="220"></a></td>
+      </tr>
+	  <tr>
+		<td align="center">Foreground atlas</td>
+		<td align="center">Background atlas</td>
+      </tr>
+	  </tbody>
+  </table>
+	  <table width="1000" border="0" align="center"><tbody><tr>
+      </tr>
+      <tr>
+		<td align="center"><video height="255" controls="controls">
+          <source src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/limitations2/goat.mp4" type="video/mp4">
+        </video>
+	    </td>
+      </tr>
+    </tbody>
+	</table>
+	
+  <p>&nbsp;</p>
+	
+	
+	<hr>
+  <h2 align="left"><a name="editDemo" id="editDemo"></a>Editing Demo</h2>
+  <p align="left">An example of how the editing is being done (2x speed).</p>
+  <h3>"Parkour"</h3>
+	  <table width="1000" border="0" align="center"><tbody><tr>
+      </tr>
+      <tr>
+		<td align="center"><video width="800" controls="controls">
+          <source src="./Layered_Neural_Atlases_for_Consistent_Video_Editing_files/editing_demo/ScreenRecording2x.mp4" type="video/mp4">
+        </video>
+	    </td>
+      </tr>
+    </tbody>
+	</table>
+  <p><br>
+  </p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <h2>References</h2>
+  <p><a name="ref1" id="ref1"></a>[1] Alex Rav-Acha, Pushmeet Kohli, Carsten Rother, and Andrew Fitzgibbon. 2008. Unwrapmosaics: A new representation for video editing. InACM SIGGRAPH 2008 papers. </p>
+  <p><a name="ref2" id="ref2"></a>[2] Allan Jabri, Andrew Owens, and Alexei A Efros. 2020. Space-time correspondence as acontrastive random walk. arXiv preprint arXiv:2006.14613 (2020).<br>
+   </p>
+
+</div>
+
+</body></html>
